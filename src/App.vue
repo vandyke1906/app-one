@@ -1,12 +1,44 @@
 <template>
-  <div id="nav">
+  <!-- <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  </div> -->
+  <nav>
+    <router-link :to="{ name: 'Home'}" >Home</router-link> |
+    <router-link to="/about">About</router-link>
+
+    <div class="nav_user">
+      {{ user.username }}
+    </div>
+  </nav>
+  <router-view />
 </template>
 
-<style>
+<script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
+export default {
+  name: 'App',
+  setup(){
+    // const state = reactive({
+    //   user: {
+    //     username: 'Userhere'
+    //   }
+    // })
+
+  const store = useStore();
+  const user = computed(() => store.state.User.user);
+
+    return {
+      //state,
+      user
+    }
+  }
+}
+</script>
+
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
